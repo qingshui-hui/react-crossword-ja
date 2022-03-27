@@ -6,7 +6,7 @@ import Crossword, {
   CrosswordProviderImperative,
   DirectionClues,
   AnswerTuple,
-} from '@jaredreisinger/react-crossword';
+} from '@naari3/react-crossword-ja';
 import styled from 'styled-components';
 
 const data = {
@@ -274,10 +274,10 @@ function App() {
 
   return (
     <Page>
-      <Header>@jaredreisinger/react-crossword example app</Header>
+      <Header>@naari3/react-crossword-ja example app</Header>
 
       <p>
-        This is a demo app that makes use of the @jaredreisinger/react-crossword
+        This is a demo app that makes use of the @naari3/react-crossword-ja
         component. It excersizes most of the functionality, so that you can see
         how to do so.
       </p>

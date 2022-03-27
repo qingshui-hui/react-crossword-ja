@@ -1,10 +1,7 @@
 Provides the answer grid itself, along with the functionality for passing typed input to the managing `CrosswordProvider` component.
 
 ```jsx
-import {
-  CrosswordProvider,
-  CrosswordGrid,
-} from '@jaredreisinger/react-crossword';
+import { CrosswordProvider, CrosswordGrid } from '@naari3/react-crossword-ja';
 
 const data = {
   across: {

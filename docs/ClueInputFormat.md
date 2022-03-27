@@ -24,7 +24,7 @@ To make crosswords as easy to create as possible, with the least amount of extra
 At the top level, the `across` and `down` properties group together the clues/answers for their respective directions. Each of those objects is a map, keyed by the answer number rather than an array. (This is done so that the creator has control over the numbering/labelling of the clues/answers.) Each item contains a `clue` and `answer` property, as well as `row` and `col` for the starting position.
 
 ```jsx
-import Crossword from '@jaredreisinger/react-crossword';
+import Crossword from '@naari3/react-crossword-ja';
 
 const data = {
   across: {

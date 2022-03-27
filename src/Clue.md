@@ -3,7 +3,7 @@ import {
   Clue,
   CrosswordContext,
   ThemeProvider,
-} from '@jaredreisinger/react-crossword';
+} from '@naari3/react-crossword-ja';
 
 <ThemeProvider
   theme={{

@@ -3,7 +3,7 @@ import {
   Cell,
   CrosswordSizeContext,
   ThemeProvider,
-} from '@jaredreisinger/react-crossword';
+} from '@naari3/react-crossword-ja';
 
 // as calculated in Crossword...
 const cellSize = 10;

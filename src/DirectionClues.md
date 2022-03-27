@@ -1,10 +1,7 @@
 Provides the list of clues for one direction (either “across” or “down”).
 
 ```jsx
-import {
-  CrosswordProvider,
-  DirectionClues,
-} from '@jaredreisinger/react-crossword';
+import { CrosswordProvider, DirectionClues } from '@naari3/react-crossword-ja';
 
 const data = {
   across: {
@@ -34,10 +31,7 @@ const data = {
 If you don't want the default heading label (of either "ACROSS" or "DOWN"), you can provide your own:
 
 ```jsx
-import {
-  CrosswordProvider,
-  DirectionClues,
-} from '@jaredreisinger/react-crossword';
+import { CrosswordProvider, DirectionClues } from '@naari3/react-crossword-ja';
 
 const data = {
   across: {

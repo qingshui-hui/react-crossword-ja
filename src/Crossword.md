@@ -8,7 +8,7 @@ _**NOTE:** Due to a shortcoming in react-docgen, the methods exposed via `useImp
 | `isCrosswordCorrect()` | _(none)_   | Returns whether the crossword is entirely correct or not.                                           |
 
 ```jsx
-import Crossword from '@jaredreisinger/react-crossword';
+import Crossword from '@naari3/react-crossword-ja';
 
 const data = {
   across: {
@@ -65,7 +65,7 @@ The following imperative methods can be called on a "ref" handle to the componen
 Providing the `acrossLabel` and/or `downLabel` properties will override the default "ACROSS" and "DOWN" used for the clues.
 
 ```jsx
-import Crossword from '@jaredreisinger/react-crossword';
+import Crossword from '@naari3/react-crossword-ja';
 
 const data = {
   across: {
@@ -100,7 +100,7 @@ If you have more than one crossword at a given URL, you can use the `storageKey`
 Purely to show the grid rendering...
 
 ```jsx
-import Crossword from '@jaredreisinger/react-crossword';
+import Crossword from '@naari3/react-crossword-ja';
 
 const clue = '';
 

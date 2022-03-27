@@ -1,5 +1,5 @@
 {
-  "name": "react-crossword-example",
+  "name": "react-crossword-ja-example",
   "version": "0.0.1",
   "private": true,
   "type": "commonjs",
@@ -10,7 +10,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@jaredreisinger/react-crossword": "file:..",
+    "@naari3/react-crossword-ja": "file:..",
     "immer": "file:../node_modules/immer",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",

@@ -1,10 +1,10 @@
 # ![react-crossword: A flexible, responsive, and easy-to-use crossword component for React apps.](./docs/react-crossword.png)
 
-[![npm version](https://img.shields.io/npm/v/@jaredreisinger/react-crossword.svg)](https://www.npmjs.com/package/@jaredreisinger/react-crossword)
+[![npm version](https://img.shields.io/npm/v/@naari3/react-crossword-ja.svg)](https://www.npmjs.com/package/@naari3/react-crossword-ja)
 [![build status](https://img.shields.io/github/workflow/status/JaredReisinger/react-crossword/build/main)](https://github.com/JaredReisinger/react-crossword/actions/workflows/build.yml)
 [![code coverage](https://img.shields.io/codecov/c/gh/JaredReisinger/react-crossword.svg)](https://codecov.io/gh/JaredReisinger/react-crossword)<br />
 [![known vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/JaredReisinger/react-crossword.svg)](https://snyk.io/test/github/JaredReisinger/react-crossword?targetFile=package.json)
-[![dependencies](https://img.shields.io/librariesio/release/npm/@jaredreisinger/react-crossword)](https://libraries.io/npm/@jaredreisinger%2Freact-crossword)<br />
+[![dependencies](https://img.shields.io/librariesio/release/npm/@naari3/react-crossword-ja)](https://libraries.io/npm/@jaredreisinger%2Freact-crossword)<br />
 [![license](https://img.shields.io/github/license/JaredReisinger/react-crossword.svg)](./LICENSE)
 ![more badges](https://img.shields.io/badge/badges-%F0%9F%91%8D%20are%20fun-orange)
 [![commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
@@ -29,9 +29,9 @@ Please see the [complete docs](https://react-crossword.jaredreisinger.com) for i
 ## Install
 
 ```sh
-npm install --save @jaredreisinger/react-crossword
+npm install --save @naari3/react-crossword-ja
   # or #
-yarn add @jaredreisinger/react-crossword
+yarn add @naari3/react-crossword-ja
 ```
 
 ## Usage
@@ -39,7 +39,7 @@ yarn add @jaredreisinger/react-crossword
 ```javascript
 import React from 'react';
 
-import Crossword from '@jaredreisinger/react-crossword';
+import Crossword from '@naari3/react-crossword-ja';
 
 const data = {
   /* ... puzzle data (see below) ... */

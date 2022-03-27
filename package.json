@@ -1,22 +1,23 @@
 {
-  "name": "@jaredreisinger/react-crossword",
-  "homepage": "https://react-crossword.jaredreisinger.com",
+  "name": "@naari3/react-crossword-ja",
+  "homepage": "https://naari3.github.io/react-crossword-ja",
   "version": "4.3.2",
   "description": "A flexible, responsive, and easy-to-use crossword component for React apps",
   "author": {
-    "name": "JaredReisinger",
-    "email": "jaredreisinger@hotmail.com"
+    "name": "naari3",
+    "email": "naari.named@hotmail.com"
   },
   "keywords": [
     "react",
-    "react-crossword",
+    "react-crossword-ja",
     "crossword",
+    "ja",
     "puzzle",
     "library"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/JaredReisinger/react-crossword"
+    "url": "https://github.com/naari3/react-crossword-ja"
   },
   "license": "MIT",
   "engines": {

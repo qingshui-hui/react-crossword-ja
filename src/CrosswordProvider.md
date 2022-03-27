@@ -12,7 +12,7 @@ import {
   CrosswordProvider,
   CrosswordGrid,
   DirectionClues,
-} from '@jaredreisinger/react-crossword';
+} from '@naari3/react-crossword-ja';
 
 const data = {
   across: {

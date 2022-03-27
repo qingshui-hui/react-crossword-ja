@@ -16,7 +16,7 @@ Note that these values can be provided either via `ThemeProvider`, or directly a
 #### Using `ThemeProvider`
 
 ```jsx
-import Crossword, { ThemeProvider } from '@jaredreisinger/react-crossword';
+import Crossword, { ThemeProvider } from '@naari3/react-crossword-ja';
 
 const data = {
   across: {
@@ -58,7 +58,7 @@ const data = {
 #### Using `theme` property
 
 ```jsx
-import Crossword from '@jaredreisinger/react-crossword';
+import Crossword from '@naari3/react-crossword-ja';
 
 const data = {
   across: {

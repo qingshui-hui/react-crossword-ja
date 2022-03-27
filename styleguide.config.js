@@ -121,7 +121,7 @@ module.exports = {
     },
     {
       name: 'Installable package (npm)',
-      href: 'https://www.npmjs.com/package/@jaredreisinger/react-crossword',
+      href: 'https://www.npmjs.com/package/@naari3/react-crossword-ja',
     },
     {
       name: 'Source code (GitHub)',
