@@ -364,6 +364,8 @@ const CrosswordProvider = React.forwardRef<
     const [currentNumber, setCurrentNumber] = useState('1');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [bulkChange, setBulkChange] = useState<string | null>(null);
+    const [bulkCursor, setBulkCursor] = useState<number>(0);
+    const [inputValue, setInputValue] = useState<string>('');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [checkQueue, setCheckQueue] = useState<GridPosition[]>([]);
 
@@ -726,6 +728,10 @@ const CrosswordProvider = React.forwardRef<
             break;
           }
 
+          case 'Process': {
+            break;
+          }
+
           default:
             // It would be nice to handle "regular" characters with onInput, but
             // that is still experimental, so we can't count on it.  Instead, we
@@ -735,7 +741,7 @@ const CrosswordProvider = React.forwardRef<
               break;
             }
 
-            handleSingleCharacter(key);
+            // We don't deal with Japanese here.
             break;
         }
 
@@ -745,7 +751,6 @@ const CrosswordProvider = React.forwardRef<
       },
       [
         moveRelative,
-        handleSingleCharacter,
         currentDirection,
         getCellData,
         focusedRow,
@@ -762,19 +767,54 @@ const CrosswordProvider = React.forwardRef<
       React.ChangeEventHandler<HTMLInputElement>
     >((event) => {
       event.preventDefault();
+      setInputValue(event.target.value);
       setBulkChange(event.target.value);
     }, []);
 
+    const handleCompositionEnd = useCallback<
+      React.CompositionEventHandler<HTMLInputElement>
+    >(
+      (event) => {
+        event.preventDefault();
+        setBulkCursor(0);
+        setBulkChange(null);
+        setInputValue('');
+      },
+      [setBulkCursor, setBulkChange]
+    );
+
     useEffect(() => {
       if (!bulkChange) {
+        setBulkCursor(0);
         return;
       }
 
+      // console.log('=======================');
+      // console.log('bulkChange', bulkChange);
+      // console.log('bulkCursor', bulkCursor);
+      // console.log('cursored', bulkChange[bulkCursor]);
+      const target = bulkChange[bulkCursor];
       // handle bulkChange by updating a character at a time (this lets us
       // leverage the existing character-entry logic).
-      handleSingleCharacter(bulkChange[0]);
-      setBulkChange(bulkChange.length === 1 ? null : bulkChange.substring(1));
-    }, [bulkChange, handleSingleCharacter]);
+      if (
+        target &&
+        /^[\u{3000}-\u{301C}\u{3041}-\u{3093}\u{309B}-\u{309E}]+$/mu.test(
+          target
+        )
+      ) {
+        handleSingleCharacter(bulkChange[bulkCursor]);
+        setBulkCursor(bulkCursor + 1);
+        console.log('bulkCursor changed to', bulkCursor + 1);
+
+        // setBulkChange(bulkChange.length === 1 ? null : bulkChange.substring(1));
+      }
+    }, [
+      bulkChange,
+      bulkCursor,
+      setBulkCursor,
+      handleSingleCharacter,
+      moveBackward,
+    ]);
 
     // When the clues *input* data changes, reset/reload the player data
     useEffect(() => {
@@ -1034,6 +1074,7 @@ const CrosswordProvider = React.forwardRef<
         handleCellClick,
         handleInputClick,
         handleClueSelected,
+        handleCompositionEnd,
         registerFocusHandler,
 
         focused,
@@ -1042,6 +1083,7 @@ const CrosswordProvider = React.forwardRef<
         selectedNumber: currentNumber,
 
         crosswordCorrect,
+        inputValue,
       }),
       [
         size,
@@ -1049,6 +1091,7 @@ const CrosswordProvider = React.forwardRef<
         clues,
         handleInputKeyDown,
         handleInputChange,
+        handleCompositionEnd,
         handleCellClick,
         handleInputClick,
         handleClueSelected,
@@ -1059,6 +1102,7 @@ const CrosswordProvider = React.forwardRef<
         currentDirection,
         currentNumber,
         crosswordCorrect,
+        inputValue,
       ]
     );
 

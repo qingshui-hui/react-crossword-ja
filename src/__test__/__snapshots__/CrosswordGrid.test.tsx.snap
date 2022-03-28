@@ -30,6 +30,7 @@ exports[`matches snapshot 1`] = `
       autoCorrect="off"
       onChange={[Function]}
       onClick={[Function]}
+      onCompositionEnd={[Function]}
       onKeyDown={[Function]}
       spellCheck="false"
       style={
@@ -37,6 +38,7 @@ exports[`matches snapshot 1`] = `
           "backgroundColor": "transparent",
           "border": 0,
           "caretColor": "transparent",
+          "color": "rgba(0, 0, 0, 0)",
           "cursor": "default",
           "fontSize": "138.95000000000002px",
           "height": "calc(33.333333333333336% - 4px)",

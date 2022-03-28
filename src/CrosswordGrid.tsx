@@ -84,11 +84,13 @@ export default function CrosswordGrid({ theme }: CrosswordGridProps) {
     handleInputChange,
     handleCellClick,
     handleInputClick,
+    handleCompositionEnd,
     registerFocusHandler,
     focused,
     selectedPosition: { row: focusedRow, col: focusedCol },
     selectedDirection: currentDirection,
     selectedNumber: currentNumber,
+    inputValue,
   } = useContext(CrosswordContext);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -160,6 +162,7 @@ export default function CrosswordGrid({ theme }: CrosswordGridProps) {
         padding: 0,
         border: 0,
         cursor: 'default',
+        color: 'rgba(0, 0, 0, 0)',
       } as const),
     [cellSize, focusedRow, focusedCol, fontSize]
   );
@@ -222,7 +225,8 @@ export default function CrosswordGrid({ theme }: CrosswordGridProps) {
               onClick={handleInputClick}
               onKeyDown={handleInputKeyDown}
               onChange={handleInputChange}
-              value=""
+              onCompositionEnd={handleCompositionEnd}
+              value={inputValue}
               // onInput={this.handleInput}
               autoComplete="off"
               spellCheck="false"

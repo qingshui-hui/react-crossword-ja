@@ -13,7 +13,7 @@ const data = {
   across: {
     1: {
       clue: 'one plus one',
-      answer: 'TWO',
+      answer: 'りんご',
       row: 0,
       col: 0,
     },
@@ -21,7 +21,7 @@ const data = {
   down: {
     2: {
       clue: 'three minus two',
-      answer: 'ONE',
+      answer: 'ごりら',
       row: 0,
       col: 2,
     },
@@ -116,7 +116,7 @@ function App() {
   }, []);
 
   const fillOneCell = useCallback((event) => {
-    crossword.current?.setGuess(0, 2, 'O');
+    crossword.current?.setGuess(0, 2, 'ご');
   }, []);
 
   const fillAllAnswers = useCallback((event) => {

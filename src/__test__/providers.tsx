@@ -18,16 +18,16 @@ const emptyData = {
 const simpleData = {
   across: {
     1: {
-      clue: 'one plus one',
-      answer: 'TWO',
+      clue: 'apple',
+      answer: 'りんご',
       row: 0,
       col: 0,
     },
   },
   down: {
     2: {
-      clue: 'three minus two',
-      answer: 'ONE',
+      clue: 'gorilla',
+      answer: 'ごりら',
       row: 0,
       col: 2,
     },
@@ -39,30 +39,30 @@ const simpleData = {
 //
 //       0 25 50 75
 //    +------------
-//  0 |  T  W  O  .
-// 25 |  .  .  N  O
-// 50 |  .  .  E  .
+//  0 |  り ん ご .
+// 25 |  .  .  り す
+// 50 |  .  .  ら .
 // 75 |  .  .  .  .
 
 const size4Data = {
   across: {
     1: {
-      clue: 'one plus one',
-      answer: 'TWO',
+      clue: 'apple',
+      answer: 'りんご',
       row: 0,
       col: 0,
     },
     3: {
-      clue: 'not yes',
-      answer: 'NO',
+      clue: 'りす',
+      answer: 'squirrel',
       row: 1,
       col: 2,
     },
   },
   down: {
     2: {
-      clue: 'three minus two',
-      answer: 'ONE',
+      clue: 'gorilla',
+      answer: 'ごりら',
       row: 0,
       col: 2,
     },

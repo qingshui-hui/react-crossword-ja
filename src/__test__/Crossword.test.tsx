@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
 import React from 'react';
 import ReactDom from 'react-dom';
-import { act, render, cleanup, fireEvent } from '@testing-library/react';
+import { act, render, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 
@@ -19,16 +19,16 @@ const emptyData = {
 const simpleData = {
   across: {
     1: {
-      clue: 'one plus one',
-      answer: 'TWO',
+      clue: 'apple',
+      answer: 'りんご',
       row: 0,
       col: 0,
     },
   },
   down: {
     2: {
-      clue: 'three minus two',
-      answer: 'ONE',
+      clue: 'gorilla',
+      answer: 'ごりら',
       row: 0,
       col: 2,
     },
@@ -68,7 +68,7 @@ it('matches snapshot', () => {
 });
 
 it('creates new gridData when the data changes', () => {
-  const clueMatch = /one plus one/;
+  const clueMatch = /apple/;
   const { queryByText, rerender } = render(<Crossword {...defaultProps} />);
   expect(queryByText(clueMatch)).toBeNull();
 
@@ -107,8 +107,8 @@ describe('imperative commands (forwarded to CrosswordProvider)', () => {
 
     const input = getByLabelText('crossword-input');
 
-    fireEvent.keyDown(input, { key: 'X' });
-    let textEl = queryByText('X');
+    userEvent.paste(input, 'い');
+    let textEl = queryByText('い');
     expect(textEl).toBeTruthy();
 
     expect(ref.current).toBeTruthy();
@@ -116,7 +116,7 @@ describe('imperative commands (forwarded to CrosswordProvider)', () => {
       ref.current?.reset();
     });
 
-    textEl = queryByText('X');
+    textEl = queryByText('い');
     expect(textEl).toBeFalsy();
   });
 
@@ -126,7 +126,7 @@ describe('imperative commands (forwarded to CrosswordProvider)', () => {
       <Crossword {...defaultProps} data={simpleData} ref={ref} />
     );
 
-    let textEl = queryByText('T');
+    let textEl = queryByText('ご');
     expect(textEl).toBeFalsy();
 
     expect(ref.current).toBeTruthy();
@@ -134,7 +134,7 @@ describe('imperative commands (forwarded to CrosswordProvider)', () => {
       ref.current?.fillAllAnswers();
     });
 
-    textEl = queryByText('T');
+    textEl = queryByText('ご');
     expect(textEl).toBeTruthy();
   });
 
@@ -156,8 +156,8 @@ describe('imperative commands (forwarded to CrosswordProvider)', () => {
     });
 
     expect(onLoadedCorrect).toBeCalledWith([
-      ['across', '1', 'TWO'],
-      ['down', '2', 'ONE'],
+      ['across', '1', 'りんご'],
+      ['down', '2', 'ごりら'],
     ]);
   });
 
@@ -201,15 +201,15 @@ describe('imperative commands (forwarded to CrosswordProvider)', () => {
       <Crossword {...defaultProps} data={simpleData} ref={ref} />
     );
 
-    let textEl = queryByText('T');
+    let textEl = queryByText('り');
     expect(textEl).toBeFalsy();
 
     expect(ref.current).toBeTruthy();
     act(() => {
-      ref.current?.setGuess(0, 0, 'T');
+      ref.current?.setGuess(0, 0, 'り');
     });
 
-    textEl = queryByText('T');
+    textEl = queryByText('り');
     expect(textEl).toBeTruthy();
   });
 });

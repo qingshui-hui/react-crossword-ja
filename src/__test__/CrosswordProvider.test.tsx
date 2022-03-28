@@ -53,7 +53,7 @@ it('matches snapshot', () => {
 it('handles typing', () => {
   const { getByLabelText } = render(<Simple withGrid />);
   const input = getByLabelText('crossword-input');
-  userEvent.type(input, 'T', { skipClick: true });
+  userEvent.type(input, 'あ', { skipClick: true });
 });
 
 describe('keyboard navigation', () => {
@@ -64,14 +64,14 @@ describe('keyboard navigation', () => {
     userEvent.click(getByLabelText('clue-1-across'));
 
     fireEvent.keyDown(input, { key: 'ArrowLeft' });
-    fireEvent.keyDown(input, { key: 'X' });
-    let { x, y } = posForText(getByText('X'));
+    userEvent.paste(input, 'た');
+    let { x, y } = posForText(getByText('た'));
     expect(x).toBe('0.125');
     expect(y).toBe('0.125');
 
-    fireEvent.keyDown(input, { key: 'Z' });
-    ({ x, y } = posForText(getByText('Z')));
-    expect(x).toBe('25.125');
+    userEvent.paste(input, 'さ');
+    ({ x, y } = posForText(getByText('さ')));
+    expect(x).toBe('10.125');
     expect(y).toBe('0.125');
   });
 
@@ -82,15 +82,15 @@ describe('keyboard navigation', () => {
     userEvent.click(getByLabelText('clue-1-across'));
 
     fireEvent.keyDown(input, { key: 'Home' });
-    fireEvent.keyDown(input, { key: 'X' });
-    let { x, y } = posForText(getByText('X'));
+    userEvent.paste(input, 'い');
+    let { x, y } = posForText(getByText('い'));
     expect(x).toBe('0.125');
     expect(y).toBe('0.125');
 
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'Z' });
-    ({ x, y } = posForText(getByText('Z')));
-    expect(x).toBe('50.125');
+    userEvent.paste(input, 'あ');
+    ({ x, y } = posForText(getByText('あ')));
+    expect(x).toBe('20.125');
     expect(y).toBe('0.125');
   });
 
@@ -101,18 +101,18 @@ describe('keyboard navigation', () => {
     userEvent.click(getByLabelText('clue-2-down'));
 
     // fireEvent.keyDown(input, { key: 'Home' });
-    fireEvent.keyDown(input, { key: 'X' });
+    userEvent.paste(input, 'い');
 
-    let { x, y } = posForText(getByText('X'));
+    let { x, y } = posForText(getByText('い'));
 
-    expect(x).toBe('50.125');
+    expect(x).toBe('20.125');
     expect(y).toBe('0.125');
 
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'Z' });
-    ({ x, y } = posForText(getByText('Z')));
-    expect(x).toBe('50.125');
-    expect(y).toBe('50.125');
+    userEvent.paste(input, 'あ');
+    ({ x, y } = posForText(getByText('あ')));
+    expect(x).toBe('20.125');
+    expect(y).toBe('20.125');
   });
 
   it('left and right (across)', () => {
@@ -122,15 +122,15 @@ describe('keyboard navigation', () => {
     userEvent.click(getByLabelText('clue-1-across'));
 
     fireEvent.keyDown(input, { key: 'ArrowLeft' });
-    fireEvent.keyDown(input, { key: 'X' });
-    let { x, y } = posForText(getByText('X'));
+    userEvent.paste(input, 'い');
+    let { x, y } = posForText(getByText('い'));
     expect(x).toBe('0.125');
     expect(y).toBe('0.125');
 
     fireEvent.keyDown(input, { key: 'ArrowRight' });
-    fireEvent.keyDown(input, { key: 'Z' });
-    ({ x, y } = posForText(getByText('Z')));
-    expect(x).toBe('50.125');
+    userEvent.paste(input, 'あ');
+    ({ x, y } = posForText(getByText('あ')));
+    expect(x).toBe('20.125');
     expect(y).toBe('0.125');
   });
 
@@ -141,16 +141,16 @@ describe('keyboard navigation', () => {
     userEvent.click(getByLabelText('clue-2-down'));
 
     fireEvent.keyDown(input, { key: 'ArrowUp' });
-    fireEvent.keyDown(input, { key: 'X' });
-    let { x, y } = posForText(getByText('X'));
-    expect(x).toBe('50.125');
+    userEvent.paste(input, 'い');
+    let { x, y } = posForText(getByText('い'));
+    expect(x).toBe('20.125');
     expect(y).toBe('0.125');
 
     fireEvent.keyDown(input, { key: 'ArrowDown' });
-    fireEvent.keyDown(input, { key: 'Z' });
-    ({ x, y } = posForText(getByText('Z')));
-    expect(x).toBe('50.125');
-    expect(y).toBe('50.125');
+    userEvent.paste(input, 'あ');
+    ({ x, y } = posForText(getByText('あ')));
+    expect(x).toBe('20.125');
+    expect(y).toBe('20.125');
   });
 
   it('tab switches direction (across to down)', () => {
@@ -162,10 +162,10 @@ describe('keyboard navigation', () => {
 
     fireEvent.keyDown(input, { key: 'Tab' }); // switches to 2-down
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'X' });
-    const { x, y } = posForText(getByText('X'));
-    expect(x).toBe('50.125');
-    expect(y).toBe('50.125');
+    userEvent.paste(input, 'い');
+    const { x, y } = posForText(getByText('い'));
+    expect(x).toBe('20.125');
+    expect(y).toBe('20.125');
   });
 
   it('tab switches direction (down to across)', () => {
@@ -176,8 +176,8 @@ describe('keyboard navigation', () => {
 
     fireEvent.keyDown(input, { key: 'Tab' }); // switches to 1-across
     fireEvent.keyDown(input, { key: 'Home' });
-    fireEvent.keyDown(input, { key: 'X' });
-    const { x, y } = posForText(getByText('X'));
+    userEvent.paste(input, 'い');
+    const { x, y } = posForText(getByText('い'));
     expect(x).toBe('0.125');
     expect(y).toBe('0.125');
   });
@@ -191,10 +191,10 @@ describe('keyboard navigation', () => {
 
     fireEvent.keyDown(input, { key: ' ' }); // switches to 2-down
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'X' });
-    const { x, y } = posForText(getByText('X'));
-    expect(x).toBe('50.125');
-    expect(y).toBe('50.125');
+    userEvent.paste(input, 'い');
+    const { x, y } = posForText(getByText('い'));
+    expect(x).toBe('20.125');
+    expect(y).toBe('20.125');
   });
 
   it('space switches direction (down to across)', () => {
@@ -205,8 +205,8 @@ describe('keyboard navigation', () => {
 
     fireEvent.keyDown(input, { key: ' ' }); // switches to 1-across
     fireEvent.keyDown(input, { key: 'Home' });
-    fireEvent.keyDown(input, { key: 'X' });
-    const { x, y } = posForText(getByText('X'));
+    userEvent.paste(input, 'い');
+    const { x, y } = posForText(getByText('い'));
     expect(x).toBe('0.125');
     expect(y).toBe('0.125');
   });
@@ -220,10 +220,10 @@ describe('keyboard navigation', () => {
 
     userEvent.click(input); // switches to 2-down
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'X' });
-    const { x, y } = posForText(getByText('X'));
-    expect(x).toBe('50.125');
-    expect(y).toBe('50.125');
+    userEvent.paste(input, 'い');
+    const { x, y } = posForText(getByText('い'));
+    expect(x).toBe('20.125');
+    expect(y).toBe('20.125');
   });
 
   it('clicking on input switches direction (down to across)', () => {
@@ -234,8 +234,8 @@ describe('keyboard navigation', () => {
 
     userEvent.click(input); // switches to 1-across
     fireEvent.keyDown(input, { key: 'Home' });
-    fireEvent.keyDown(input, { key: 'X' });
-    const { x, y } = posForText(getByText('X'));
+    userEvent.paste(input, 'い');
+    const { x, y } = posForText(getByText('い'));
     expect(x).toBe('0.125');
     expect(y).toBe('0.125');
   });
@@ -246,14 +246,14 @@ describe('keyboard navigation', () => {
 
     userEvent.click(getByLabelText('clue-1-across'));
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'Z' });
-    userEvent.click(getByText('Z')); // switches to 2-down
+    userEvent.paste(input, 'あ');
+    userEvent.click(getByText('あ')); // switches to 2-down
 
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'X' });
-    const { x, y } = posForText(getByText('X'));
-    expect(x).toBe('50.125');
-    expect(y).toBe('50.125');
+    userEvent.paste(input, 'い');
+    const { x, y } = posForText(getByText('い'));
+    expect(x).toBe('20.125');
+    expect(y).toBe('20.125');
   });
 
   it('clicking on cell when focused switches direction (down to across)', () => {
@@ -261,13 +261,13 @@ describe('keyboard navigation', () => {
     const input = getByLabelText('crossword-input');
 
     userEvent.click(getByLabelText('clue-2-down'));
-    fireEvent.keyDown(input, { key: 'Z' });
+    userEvent.paste(input, 'あ');
     fireEvent.keyDown(input, { key: 'ArrowUp' });
-    userEvent.click(getByText('Z')); // switches to 1-across
+    userEvent.click(getByText('あ')); // switches to 1-across
 
     fireEvent.keyDown(input, { key: 'Home' });
-    fireEvent.keyDown(input, { key: 'X' });
-    const { x, y } = posForText(getByText('X'));
+    userEvent.paste(input, 'い');
+    const { x, y } = posForText(getByText('い'));
     expect(x).toBe('0.125');
     expect(y).toBe('0.125');
   });
@@ -280,17 +280,17 @@ describe('keyboard navigation', () => {
 
     userEvent.click(getByLabelText('clue-1-across'));
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'Z' });
-    let { x, y } = posForText(getByText('Z'));
-    expect(x).toBe('50.125');
+    userEvent.paste(input, 'あ');
+    let { x, y } = posForText(getByText('あ'));
+    expect(x).toBe('20.125');
     expect(y).toBe('0.125');
 
     fireEvent.keyDown(input, { key: 'Backspace' });
-    expect(queryByText('Z')).toBeNull();
+    expect(queryByText('あ')).toBeNull();
 
-    fireEvent.keyDown(input, { key: 'Z' });
-    ({ x, y } = posForText(getByText('Z')));
-    expect(x).toBe('25.125'); // second col!
+    userEvent.paste(input, 'あ');
+    ({ x, y } = posForText(getByText('あ')));
+    expect(x).toBe('10.125'); // second col!
     expect(y).toBe('0.125');
   });
 
@@ -302,18 +302,18 @@ describe('keyboard navigation', () => {
 
     userEvent.click(getByLabelText('clue-2-down'));
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'Z' });
-    let { x, y } = posForText(getByText('Z'));
-    expect(x).toBe('50.125');
-    expect(y).toBe('50.125');
+    userEvent.paste(input, 'あ');
+    let { x, y } = posForText(getByText('あ'));
+    expect(x).toBe('20.125');
+    expect(y).toBe('20.125');
 
     fireEvent.keyDown(input, { key: 'Backspace' });
-    expect(queryByText('Z')).toBeNull();
+    expect(queryByText('あ')).toBeNull();
 
-    fireEvent.keyDown(input, { key: 'Z' });
-    ({ x, y } = posForText(getByText('Z')));
-    expect(x).toBe('50.125');
-    expect(y).toBe('25.125'); // second row!
+    userEvent.paste(input, 'あ');
+    ({ x, y } = posForText(getByText('あ')));
+    expect(x).toBe('20.125');
+    expect(y).toBe('10.125'); // second row!
   });
 
   it('delete clears and does not move back (across)', () => {
@@ -324,17 +324,17 @@ describe('keyboard navigation', () => {
 
     userEvent.click(getByLabelText('clue-1-across'));
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'Z' });
-    let { x, y } = posForText(getByText('Z'));
-    expect(x).toBe('50.125');
+    userEvent.paste(input, 'あ');
+    let { x, y } = posForText(getByText('あ'));
+    expect(x).toBe('20.125');
     expect(y).toBe('0.125');
 
     fireEvent.keyDown(input, { key: 'Delete' });
     expect(queryByText('Z')).toBeNull();
 
-    fireEvent.keyDown(input, { key: 'Z' });
-    ({ x, y } = posForText(getByText('Z')));
-    expect(x).toBe('50.125'); // still third col!
+    userEvent.paste(input, 'あ');
+    ({ x, y } = posForText(getByText('あ')));
+    expect(x).toBe('20.125'); // still third col!
     expect(y).toBe('0.125');
   });
 
@@ -346,49 +346,18 @@ describe('keyboard navigation', () => {
 
     userEvent.click(getByLabelText('clue-2-down'));
     fireEvent.keyDown(input, { key: 'End' });
-    fireEvent.keyDown(input, { key: 'Z' });
-    let { x, y } = posForText(getByText('Z'));
-    expect(x).toBe('50.125');
-    expect(y).toBe('50.125');
+    userEvent.paste(input, 'あ');
+    let { x, y } = posForText(getByText('あ'));
+    expect(x).toBe('20.125');
+    expect(y).toBe('20.125');
 
     fireEvent.keyDown(input, { key: 'Delete' });
-    expect(queryByText('Z')).toBeNull();
+    expect(queryByText('あ')).toBeNull();
 
-    fireEvent.keyDown(input, { key: 'Z' });
-    ({ x, y } = posForText(getByText('Z')));
-    expect(x).toBe('50.125');
-    expect(y).toBe('50.125'); // still third row!
-  });
-
-  it('ctrl, meta, alt character go unused', () => {
-    const { getByLabelText, queryByText } = render(
-      <Size4 withGrid withClues />
-    );
-    const input = getByLabelText('crossword-input');
-
-    userEvent.click(getByLabelText('clue-1-across'));
-
-    fireEvent.keyDown(input, { ctrlKey: true, key: 'X' });
-    expect(queryByText('X')).toBeNull();
-
-    fireEvent.keyDown(input, { altKey: true, key: 'X' });
-    expect(queryByText('X')).toBeNull();
-
-    fireEvent.keyDown(input, { metaKey: true, key: 'X' });
-    expect(queryByText('X')).toBeNull();
-  });
-
-  it('unknown keys go unused', () => {
-    const { getByLabelText, queryByText } = render(
-      <Size4 withGrid withClues />
-    );
-    const input = getByLabelText('crossword-input');
-
-    userEvent.click(getByLabelText('clue-1-across'));
-
-    fireEvent.keyDown(input, { key: 'BOGUS' });
-    expect(queryByText('B')).toBeNull();
-    expect(queryByText('BOGUS')).toBeNull();
+    userEvent.paste(input, 'あ');
+    ({ x, y } = posForText(getByText('あ')));
+    expect(x).toBe('20.125');
+    expect(y).toBe('20.125'); // still third row!
   });
 
   it('handles "bulk" input (pasting)', () => {
@@ -397,18 +366,18 @@ describe('keyboard navigation', () => {
 
     userEvent.click(getByLabelText('clue-1-across'));
 
-    fireEvent.change(input, { target: { value: 'XYZ' } });
+    fireEvent.change(input, { target: { value: 'あいう' } });
 
-    let { x, y } = posForText(getByText('X'));
+    let { x, y } = posForText(getByText('あ'));
     expect(x).toBe('0.125');
     expect(y).toBe('0.125');
 
-    ({ x, y } = posForText(getByText('Y')));
-    expect(x).toBe('25.125');
+    ({ x, y } = posForText(getByText('い')));
+    expect(x).toBe('10.125');
     expect(y).toBe('0.125');
 
-    ({ x, y } = posForText(getByText('Z')));
-    expect(x).toBe('50.125');
+    ({ x, y } = posForText(getByText('う')));
+    expect(x).toBe('20.125');
     expect(y).toBe('0.125');
   });
 });
@@ -423,12 +392,10 @@ describe('onAnswerComplete', () => {
     userEvent.click(getByLabelText('clue-1-across'));
     // we don't need to await this, as the onCorrect handler is taking care of
     // that for us...
-    userEvent.type(getByLabelText('crossword-input'), 'TWO', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'りんご');
 
     expect(onAnswerComplete).toBeCalledTimes(1);
-    expect(onAnswerComplete).toBeCalledWith('across', '1', true, 'TWO');
+    expect(onAnswerComplete).toBeCalledWith('across', '1', true, 'りんご');
   });
 
   it('fires onAnswerComplete when all cells in an answer are filled, even if incorrectly', () => {
@@ -438,12 +405,10 @@ describe('onAnswerComplete', () => {
     );
 
     userEvent.click(getByLabelText('clue-1-across'));
-    userEvent.type(getByLabelText('crossword-input'), 'XXX', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'あああ');
 
     expect(onAnswerComplete).toBeCalledTimes(1);
-    expect(onAnswerComplete).toBeCalledWith('across', '1', false, 'TWO');
+    expect(onAnswerComplete).toBeCalledWith('across', '1', false, 'りんご');
   });
 });
 
@@ -457,12 +422,10 @@ describe('onAnswerComplete', () => {
       );
 
       userEvent.click(getByLabelText('clue-1-across'));
-      userEvent.type(getByLabelText('crossword-input'), 'TWO', {
-        skipClick: true,
-      });
+      userEvent.paste(getByLabelText('crossword-input'), 'りんご');
 
       expect(onAnswerCorrect).toBeCalledTimes(1);
-      expect(onAnswerCorrect).toBeCalledWith('across', '1', 'TWO');
+      expect(onAnswerCorrect).toBeCalledWith('across', '1', 'りんご');
     });
 
     it(`does not fire ${handler} when a wrong answer is entered`, () => {
@@ -495,12 +458,10 @@ describe('onAnswerIncorrect callback', () => {
     );
 
     userEvent.click(getByLabelText('clue-1-across'));
-    userEvent.type(getByLabelText('crossword-input'), 'XXX', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'あああ');
 
     expect(onAnswerIncorrect).toBeCalledTimes(1);
-    expect(onAnswerIncorrect).toBeCalledWith('across', '1', 'TWO');
+    expect(onAnswerIncorrect).toBeCalledWith('across', '1', 'りんご');
   });
 
   it('does not fire onAnswerIncorrect when a correct answer is entered', () => {
@@ -512,9 +473,7 @@ describe('onAnswerIncorrect callback', () => {
     const input = getByLabelText('crossword-input');
 
     userEvent.click(getByLabelText('clue-1-across'));
-    userEvent.type(getByLabelText('crossword-input'), 'TWO', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'りんご');
 
     expect(onAnswerIncorrect).toBeCalledTimes(0);
 
@@ -531,10 +490,10 @@ describe('onCellChange callback', () => {
     );
 
     userEvent.click(getByLabelText('clue-1-across'));
-    userEvent.type(getByLabelText('crossword-input'), 'T', { skipClick: true });
+    userEvent.paste(getByLabelText('crossword-input'), 'り');
 
     expect(onCellChange).toBeCalledTimes(1);
-    expect(onCellChange).toBeCalledWith(0, 0, 'T');
+    expect(onCellChange).toBeCalledWith(0, 0, 'り');
   });
 
   it('does not fire onCellChange when a cell gets the same value', () => {
@@ -544,13 +503,13 @@ describe('onCellChange callback', () => {
     );
 
     userEvent.click(getByLabelText('clue-1-across'));
-    userEvent.type(getByLabelText('crossword-input'), 'T', { skipClick: true });
+    userEvent.paste(getByLabelText('crossword-input'), 'り');
 
     expect(onCellChange).toBeCalledTimes(1);
     onCellChange.mockClear();
 
     userEvent.click(getByLabelText('clue-1-across'));
-    userEvent.type(getByLabelText('crossword-input'), 'T', { skipClick: true });
+    userEvent.paste(getByLabelText('crossword-input'), 'り');
     expect(onCellChange).toBeCalledTimes(0);
   });
 });
@@ -564,15 +523,11 @@ describe('onCrosswordComplete callback', () => {
 
     onCrosswordComplete.mockClear();
     userEvent.click(getByLabelText('clue-1-across'));
-    userEvent.type(getByLabelText('crossword-input'), 'TWO', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'りんご');
     userEvent.click(getByLabelText('clue-2-down'));
-    userEvent.type(getByLabelText('crossword-input'), 'ON', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'ごり');
     expect(onCrosswordComplete).toBeCalledTimes(0);
-    userEvent.type(getByLabelText('crossword-input'), 'E', { skipClick: true });
+    userEvent.paste(getByLabelText('crossword-input'), 'ら');
 
     expect(onCrosswordComplete).toBeCalledTimes(1);
     expect(onCrosswordComplete).toBeCalledWith(true);
@@ -586,17 +541,13 @@ describe('onCrosswordComplete callback', () => {
 
     onCrosswordComplete.mockClear();
     userEvent.click(getByLabelText('clue-1-across'));
-    userEvent.type(getByLabelText('crossword-input'), 'TWO', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'りんご');
     userEvent.click(getByLabelText('clue-2-down'));
-    userEvent.type(getByLabelText('crossword-input'), 'ONE', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'ごりら');
     expect(onCrosswordComplete).toBeCalledTimes(1);
     onCrosswordComplete.mockClear();
 
-    userEvent.type(getByLabelText('crossword-input'), 'X', { skipClick: true });
+    userEvent.paste(getByLabelText('crossword-input'), 'あ');
 
     expect(onCrosswordComplete).toBeCalledTimes(1);
     expect(onCrosswordComplete).toBeCalledWith(false);
@@ -622,15 +573,11 @@ describe('onCrosswordCorrect callback', () => {
 
     onCrosswordCorrect.mockClear();
     userEvent.click(getByLabelText('clue-1-across'));
-    userEvent.type(getByLabelText('crossword-input'), 'TWO', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'りんご');
     userEvent.click(getByLabelText('clue-2-down'));
-    userEvent.type(getByLabelText('crossword-input'), 'ON', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'ごり');
     expect(onCrosswordCorrect).toBeCalledTimes(0);
-    userEvent.type(getByLabelText('crossword-input'), 'E', { skipClick: true });
+    userEvent.paste(getByLabelText('crossword-input'), 'ら');
 
     expect(onCrosswordCorrect).toBeCalledTimes(1);
     expect(onCrosswordCorrect).toBeCalledWith(true);
@@ -644,17 +591,13 @@ describe('onCrosswordCorrect callback', () => {
 
     onCrosswordCorrect.mockClear();
     userEvent.click(getByLabelText('clue-1-across'));
-    userEvent.type(getByLabelText('crossword-input'), 'TWO', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'りんご');
     userEvent.click(getByLabelText('clue-2-down'));
-    userEvent.type(getByLabelText('crossword-input'), 'ONE', {
-      skipClick: true,
-    });
+    userEvent.paste(getByLabelText('crossword-input'), 'ごりら');
     expect(onCrosswordCorrect).toBeCalledTimes(1);
     onCrosswordCorrect.mockClear();
 
-    userEvent.type(getByLabelText('crossword-input'), 'X', { skipClick: true });
+    userEvent.paste(getByLabelText('crossword-input'), 'あ');
 
     expect(onCrosswordCorrect).toBeCalledTimes(1);
     expect(onCrosswordCorrect).toBeCalledWith(false);
@@ -749,8 +692,8 @@ describe('imperative commands', () => {
 
     const input = getByLabelText('crossword-input');
 
-    fireEvent.keyDown(input, { key: 'X' });
-    let textEl = queryByText('X');
+    fireEvent.change(input, { target: { value: 'あ' } });
+    let textEl = queryByText('あ');
     expect(textEl).toBeTruthy();
 
     expect(ref.current).toBeTruthy();
@@ -758,7 +701,7 @@ describe('imperative commands', () => {
       ref.current?.reset();
     });
 
-    textEl = queryByText('X');
+    textEl = queryByText('あ');
     expect(textEl).toBeFalsy();
   });
 
@@ -772,8 +715,8 @@ describe('imperative commands', () => {
 
     const input = getByLabelText('crossword-input');
 
-    fireEvent.keyDown(input, { key: 'X' });
-    let textEl = queryByText('X');
+    fireEvent.change(input, { target: { value: 'あ' } });
+    let textEl = queryByText('あ');
     expect(textEl).toBeTruthy();
 
     expect(ref.current).toBeTruthy();
@@ -781,7 +724,7 @@ describe('imperative commands', () => {
       ref.current?.reset();
     });
 
-    textEl = queryByText('X');
+    textEl = queryByText('あ');
     expect(textEl).toBeFalsy();
   });
 
@@ -791,7 +734,7 @@ describe('imperative commands', () => {
       <Simple withGrid withClues forwardedRef={ref} />
     );
 
-    let textEl = queryByText('T');
+    let textEl = queryByText('ご');
     expect(textEl).toBeFalsy();
 
     expect(ref.current).toBeTruthy();
@@ -799,7 +742,7 @@ describe('imperative commands', () => {
       ref.current?.fillAllAnswers();
     });
 
-    textEl = queryByText('T');
+    textEl = queryByText('ご');
     expect(textEl).toBeTruthy();
   });
 
@@ -821,8 +764,8 @@ describe('imperative commands', () => {
     });
 
     expect(onLoadedCorrect).toBeCalledWith([
-      ['across', '1', 'TWO'],
-      ['down', '2', 'ONE'],
+      ['across', '1', 'りんご'],
+      ['down', '2', 'ごりら'],
     ]);
   });
 
@@ -866,15 +809,15 @@ describe('imperative commands', () => {
       <Simple withGrid withClues forwardedRef={ref} />
     );
 
-    let textEl = queryByText('T');
+    let textEl = queryByText('り');
     expect(textEl).toBeFalsy();
 
     expect(ref.current).toBeTruthy();
     act(() => {
-      ref.current?.setGuess(0, 0, 'T');
+      ref.current?.setGuess(0, 0, 'り');
     });
 
-    textEl = queryByText('T');
+    textEl = queryByText('り');
     expect(textEl).toBeTruthy();
   });
 
@@ -884,7 +827,7 @@ describe('imperative commands', () => {
 
     expect(ref.current).toBeTruthy();
     act(() => {
-      expect(() => ref.current?.setGuess(1, 0, 'T')).toThrow();
+      expect(() => ref.current?.setGuess(1, 0, 'り')).toThrow();
     });
   });
 });

@@ -31,6 +31,7 @@ Array [
         autoCorrect="off"
         onChange={[Function]}
         onClick={[Function]}
+        onCompositionEnd={[Function]}
         onKeyDown={[Function]}
         spellCheck="false"
         style={
@@ -38,6 +39,7 @@ Array [
             "backgroundColor": "transparent",
             "border": 0,
             "caretColor": "transparent",
+            "color": "rgba(0, 0, 0, 0)",
             "cursor": "default",
             "fontSize": "418.94999999999993px",
             "height": "calc(100% - 4px)",

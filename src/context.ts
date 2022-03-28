@@ -35,6 +35,8 @@ export interface CrosswordContextType {
   handleClueSelected: (direction: Direction, number: string) => void;
   /** Provides registration for focus actions */
   registerFocusHandler: (focusHandler: FocusHandler | null) => void;
+  /** A handler for `<input>` element Change events. */
+  handleCompositionEnd: React.CompositionEventHandler<HTMLInputElement>;
 
   // player state
   focused: boolean;
@@ -43,6 +45,7 @@ export interface CrosswordContextType {
   selectedNumber: string;
 
   crosswordCorrect: boolean;
+  inputValue: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -61,6 +64,7 @@ export const CrosswordContext = React.createContext<CrosswordContextType>({
 
   handleInputKeyDown: nop,
   handleInputChange: nop,
+  handleCompositionEnd: nop,
   handleCellClick: nop,
   handleInputClick: nop,
   handleClueSelected: nop,
@@ -72,6 +76,7 @@ export const CrosswordContext = React.createContext<CrosswordContextType>({
   selectedNumber: '',
 
   crosswordCorrect: false,
+  inputValue: '',
 });
 
 export interface CrosswordSizeContextType {
