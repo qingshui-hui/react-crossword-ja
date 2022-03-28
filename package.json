@@ -34,6 +34,7 @@
     "commit": "git-cz",
     "#release": "npm run dist && semantic-release",
     "build": "tsc",
+    "watch": "tsc -w",
     "dist": "npm run clean && npm run build",
     "clean": "rimraf build coverage dist styleguide",
     "doc:dev": "styleguidist server",
