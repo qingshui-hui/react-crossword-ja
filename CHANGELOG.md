@@ -1,3 +1,10 @@
+# [4.5.0](https://github.com/naari3/react-crossword-ja/compare/v4.4.0...v4.5.0) (2022-03-29)
+
+
+### Features
+
+* support long vowel symbol ([86ae5c5](https://github.com/naari3/react-crossword-ja/commit/86ae5c58f7dd2943ba7b207d3303207b22e09203))
+
 # [4.4.0](https://github.com/naari3/react-crossword-ja/compare/v4.3.2...v4.4.0) (2022-03-29)
 
 
