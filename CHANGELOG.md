@@ -1,3 +1,13 @@
+# [4.4.0](https://github.com/naari3/react-crossword-ja/compare/v4.3.2...v4.4.0) (2022-03-29)
+
+
+### Features
+
+* add npm script 'watch' ([1b7f900](https://github.com/naari3/react-crossword-ja/commit/1b7f9005b3d0a7933e7e367aa922b31865cbd1b3))
+* rename to @naari3/react-crossword-ja ([4b9df39](https://github.com/naari3/react-crossword-ja/commit/4b9df3928b8a667c82b0beb40efbba380f6b0dda))
+* support hiragana ([c829764](https://github.com/naari3/react-crossword-ja/commit/c829764743a45ee330574c21492e751436764c01))
+* **word:** support lowercase hiragana ([dc27db9](https://github.com/naari3/react-crossword-ja/commit/dc27db9b1d7a67e259f366964563deabb33da21d))
+
 ## [4.3.2](https://github.com/JaredReisinger/react-crossword/compare/v4.3.1...v4.3.2) (2022-03-10)
 
 
