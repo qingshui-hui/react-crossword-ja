@@ -457,6 +457,26 @@ const CrosswordProvider = React.forwardRef<
       [onAnswerComplete, onAnswerCorrect, onAnswerIncorrect, onCorrect]
     );
 
+    function normalizeHiragana(word: string): string {
+      const normMap = {
+        ぁ: 'あ',
+        ぃ: 'い',
+        ぅ: 'う',
+        ぇ: 'え',
+        ぉ: 'お',
+        っ: 'つ',
+        ゃ: 'や',
+        ゅ: 'ゆ',
+        ょ: 'よ',
+        ゎ: 'ゎ',
+      };
+      let replaced = word;
+      Object.entries(normMap).forEach(([k, v]) => {
+        replaced = replaced.replace(k, v);
+      });
+      return replaced;
+    }
+
     const checkCorrectness = useCallback(
       (row: number, col: number) => {
         const cell = getCellData(row, col);
@@ -493,7 +513,10 @@ const CrosswordProvider = React.forwardRef<
               break;
             }
 
-            if (checkCell.guess !== checkCell.answer) {
+            if (
+              normalizeHiragana(checkCell.guess) !==
+              normalizeHiragana(checkCell.answer)
+            ) {
               correct = false;
             }
           }

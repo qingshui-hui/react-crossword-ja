@@ -34,6 +34,25 @@ const simpleData = {
   },
 };
 
+const lowerData = {
+  across: {
+    1: {
+      clue: 'sea otter',
+      answer: 'らっこ',
+      row: 0,
+      col: 0,
+    },
+  },
+  down: {
+    2: {
+      clue: 'building blocks',
+      answer: 'つみき',
+      row: 0,
+      col: 1,
+    },
+  },
+};
+
 // Simplify tests by using data that makes a 4x4 grid (so that each cell is
 // 25x25, plus the 0.125 padding):
 //
@@ -99,6 +118,12 @@ export function Size4(props: ProviderProps) {
 }
 
 Size4.defaultProps = defaultProps;
+
+export function LowerHiragana(props: ProviderProps) {
+  return <ProviderAndComponents {...props} data={lowerData} />;
+}
+
+LowerHiragana.defaultProps = defaultProps;
 
 function ProviderAndComponents({
   data,

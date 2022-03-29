@@ -12,7 +12,7 @@ import styled from 'styled-components';
 const data = {
   across: {
     1: {
-      clue: 'one plus one',
+      clue: 'apple',
       answer: 'りんご',
       row: 0,
       col: 0,
@@ -20,7 +20,7 @@ const data = {
   },
   down: {
     2: {
-      clue: 'three minus two',
+      clue: 'gorilla',
       answer: 'ごりら',
       row: 0,
       col: 2,

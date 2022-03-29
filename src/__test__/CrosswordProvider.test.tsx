@@ -7,7 +7,7 @@ import renderer from 'react-test-renderer';
 
 import '@testing-library/jest-dom/extend-expect';
 
-import { Empty, Simple, Size4 } from './providers';
+import { Empty, LowerHiragana, Simple, Size4 } from './providers';
 
 import { CrosswordProviderImperative } from '../CrosswordProvider';
 import { CrosswordContext } from '../context';
@@ -426,6 +426,20 @@ describe('onAnswerComplete', () => {
 
       expect(onAnswerCorrect).toBeCalledTimes(1);
       expect(onAnswerCorrect).toBeCalledWith('across', '1', 'りんご');
+    });
+
+    it(`fires ${handler} when an mixed lowercase hiragana`, () => {
+      const onAnswerCorrect = jest.fn();
+      const handlerProp = { [handler]: onAnswerCorrect };
+      const { getByLabelText } = render(
+        <LowerHiragana withGrid withClues {...handlerProp} />
+      );
+
+      userEvent.click(getByLabelText('clue-1-across'));
+      userEvent.paste(getByLabelText('crossword-input'), 'らつこ');
+
+      expect(onAnswerCorrect).toBeCalledTimes(1);
+      expect(onAnswerCorrect).toBeCalledWith('across', '1', 'らっこ');
     });
 
     it(`does not fire ${handler} when a wrong answer is entered`, () => {
