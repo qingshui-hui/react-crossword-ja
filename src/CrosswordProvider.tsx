@@ -821,13 +821,13 @@ const CrosswordProvider = React.forwardRef<
       // leverage the existing character-entry logic).
       if (
         target &&
-        /^[\u{3000}-\u{301C}\u{3041}-\u{3093}\u{309B}-\u{309E}]+$/mu.test(
+        /^[\u{3000}-\u{301C}\u{3041}-\u{3093}\u{309B}-\u{309E}\u{30FC}\u{FF5E}]+$/mu.test(
           target
         )
       ) {
         handleSingleCharacter(bulkChange[bulkCursor]);
         setBulkCursor(bulkCursor + 1);
-        console.log('bulkCursor changed to', bulkCursor + 1);
+        // console.log('bulkCursor changed to', bulkCursor + 1);
 
         // setBulkChange(bulkChange.length === 1 ? null : bulkChange.substring(1));
       }
