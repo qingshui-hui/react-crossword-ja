@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import type {
   CellData,
@@ -38,6 +38,13 @@ export interface CrosswordContextType {
   /** A handler for `<input>` element Change events. */
   handleCompositionEnd: React.CompositionEventHandler<HTMLInputElement>;
 
+  /** The indexes of cells which make a keyword. */
+  keyIndexes: number[];
+  setKeyIndexes: (keyIndexes: number[]) => void;
+  selectKeywordMode: boolean;
+  setSelectKeywordMode: (keyIndexes: boolean) => void;
+  setFocused: (keyIndexes: boolean) => void;
+
   // player state
   focused: boolean;
   selectedPosition: GridPosition;
@@ -70,6 +77,12 @@ export const CrosswordContext = React.createContext<CrosswordContextType>({
   handleClueSelected: nop,
   registerFocusHandler: nop,
 
+  keyIndexes: [],
+  setKeyIndexes: nop,
+  selectKeywordMode: false,
+  setSelectKeywordMode: nop,
+  setFocused: nop,
+
   focused: false,
   selectedPosition: { row: 0, col: 0 },
   selectedDirection: 'across',
@@ -95,3 +108,12 @@ export const CrosswordSizeContext =
     cellHalf: 0,
     fontSize: 0,
   });
+
+export function useCrosswordContext() {
+  const crossword = useContext(CrosswordContext);
+
+  if (crossword === null)
+    throw new Error('CrosswordProvider でラップしてください。');
+
+  return crossword;
+}
