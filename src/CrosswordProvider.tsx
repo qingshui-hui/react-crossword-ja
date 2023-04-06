@@ -345,6 +345,7 @@ const CrosswordProvider = React.forwardRef<
       size,
       gridData: masterGridData,
       clues: masterClues,
+      keyIndexes: masterKeyIndexes,
     } = useMemo(() => createGridData(data), [data]);
 
     const [gridData, setGridData] = useState<GridData>([]);
@@ -368,6 +369,13 @@ const CrosswordProvider = React.forwardRef<
     const [inputValue, setInputValue] = useState<string>('');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [checkQueue, setCheckQueue] = useState<GridPosition[]>([]);
+
+    const [keyIndexes, setKeyIndexes] = useState(masterKeyIndexes);
+    const [selectKeywordMode, setSelectKeywordModeRaw] = useState(false);
+    const setSelectKeywordMode = useCallback((val: boolean) => {
+      setSelectKeywordModeRaw(val);
+      setFocused(false);
+    }, []);
 
     const contextTheme = useContext(ThemeContext);
 
@@ -907,11 +915,32 @@ const CrosswordProvider = React.forwardRef<
           }
 
           setCurrentNumber(cellData[direction] ?? '');
+
+          if (selectKeywordMode) {
+            if (!keyIndexes.includes((cellData as UsedCellData).index)) {
+              setKeyIndexes(
+                keyIndexes.concat([(cellData as UsedCellData).index])
+              );
+            }
+            // not working but i want to switch focus in selectKeywordMode
+            // if (focused && row === focusedRow && col === focusedCol) {
+            //   setFocused(false);
+            //   return;
+            // }
+          }
         }
 
         focus();
       },
-      [currentDirection, focus, focused, focusedCol, focusedRow]
+      [
+        currentDirection,
+        focus,
+        focused,
+        focusedCol,
+        focusedRow,
+        keyIndexes,
+        selectKeywordMode,
+      ]
     );
 
     const handleInputClick = useCallback<
@@ -1100,6 +1129,12 @@ const CrosswordProvider = React.forwardRef<
         handleCompositionEnd,
         registerFocusHandler,
 
+        keyIndexes,
+        setKeyIndexes,
+        selectKeywordMode,
+        setSelectKeywordMode,
+        setFocused,
+
         focused,
         selectedPosition: { row: focusedRow, col: focusedCol },
         selectedDirection: currentDirection,
@@ -1119,6 +1154,10 @@ const CrosswordProvider = React.forwardRef<
         handleInputClick,
         handleClueSelected,
         registerFocusHandler,
+        keyIndexes,
+        setKeyIndexes,
+        selectKeywordMode,
+        setSelectKeywordMode,
         focused,
         focusedRow,
         focusedCol,

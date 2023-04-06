@@ -43,6 +43,8 @@ export const cluesInputShapeOriginal = PropTypes.shape({
   across: PropTypes.objectOf(clueShapeOriginal.isRequired).isRequired,
   /** "down" clues and answers */
   down: PropTypes.objectOf(clueShapeOriginal.isRequired).isRequired,
+  /** indexes of cells which create a keyword */
+  keys: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
 });
 
 /**
@@ -50,10 +52,11 @@ export const cluesInputShapeOriginal = PropTypes.shape({
  * keys/properties under 'across' and 'down' are canonically the clue/answer
  * numbers, they can be *any* string value
  */
-export type CluesInputOriginal = Record<
-  Direction,
-  Record<string, ClueTypeOriginal>
->;
+export type CluesInputOriginal = {
+  across: Record<string, ClueTypeOriginal>;
+  down: Record<string, ClueTypeOriginal>;
+  keys: number[];
+};
 
 /**
  * The input-format for clues and answers.  Only the original format is
@@ -74,6 +77,8 @@ export type UsedCellData = GridPosition & {
   // clue: string;
   /** If present, a display "number" label for the cell */
   number?: string;
+  /** The correct answer value for *only* this cell (a single letter) */
+  index: number;
   /** The correct answer value for *only* this cell (a single letter) */
   answer: string;
   /** The user's guess value for *only* this cell (a single letter) */

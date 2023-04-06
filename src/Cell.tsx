@@ -23,6 +23,9 @@ const cellPropTypes = {
 
   /** handler called when the cell is clicked */
   onClick: PropTypes.func,
+
+  /** label of key cell */
+  keyLabel: PropTypes.string,
 };
 
 export type CellProps = EnhancedProps<
@@ -48,6 +51,7 @@ export default function Cell({
   onClick,
   focus,
   highlight,
+  keyLabel,
 }: CellProps) {
   const { cellSize, cellPadding, cellInner, cellHalf, fontSize } =
     useContext(CrosswordSizeContext);
@@ -94,8 +98,8 @@ export default function Cell({
             ? highlightBackground
             : cellBackground
         }
-        stroke={cellBorder}
-        strokeWidth={cellSize / 50}
+        stroke={keyLabel ? 'red' : cellBorder}
+        strokeWidth={keyLabel ? cellSize / 50 : cellSize / 100}
       />
       {number && (
         <text
@@ -106,6 +110,17 @@ export default function Cell({
           style={{ fontSize: '50%', fill: numberColor }}
         >
           {number}
+        </text>
+      )}
+      {keyLabel && (
+        <text
+          x={x + (cellSize * 3) / 4 - cellPadding * 4}
+          y={y + cellPadding * 4}
+          textAnchor="start"
+          dominantBaseline="hanging"
+          style={{ fontSize: '50%', fill: '#F69896' }}
+        >
+          {keyLabel}
         </text>
       )}
       <text
@@ -130,6 +145,7 @@ Cell.defaultProps = {
   focus: false,
   highlight: false,
   onClick: null,
+  keyLabel: '',
 };
 
 // export default Cell;

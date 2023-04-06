@@ -9,6 +9,8 @@ import Clue from './Clue';
 
 import DirectionClues from './DirectionClues';
 
+import KeyCells from './KeyCells';
+
 import Crossword, { CrosswordImperative, CrosswordProps } from './Crossword';
 
 import CrosswordGrid, {
@@ -33,6 +35,7 @@ export {
   CrosswordImperative,
   CrosswordProps,
   CrosswordGrid,
+  KeyCells,
   // CrosswordGridImperative,
   CrosswordGridProps,
   CrosswordProvider,

@@ -145,7 +145,14 @@ export function createGridData(data: CluesInput) {
   fillClues(gridData, clues, data, 'across');
   fillClues(gridData, clues, data, 'down');
 
-  return { size, gridData, clues };
+  const keyIndexes: number[] = data.keys ?? [];
+
+  const flattedCellData = gridData.flat().filter((cellData) => cellData.used);
+  flattedCellData.forEach((cellData, idx) => {
+    (cellData as UsedCellData).index = idx;
+  });
+
+  return { size, gridData, clues, keyIndexes };
 }
 
 // sort helper for clues...
@@ -259,4 +266,8 @@ export function findCorrectAnswers(data: CluesInput, gridData: GuessData) {
   });
 
   return correctAnswers;
+}
+
+export function indexToAlphabet(index: number) {
+  return (index + 10).toString(36).toUpperCase();
 }

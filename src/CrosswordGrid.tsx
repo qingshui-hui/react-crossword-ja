@@ -14,6 +14,7 @@ import Cell from './Cell';
 
 import { CrosswordContext, CrosswordSizeContext } from './context';
 import { FocusHandler } from './types';
+import { indexToAlphabet } from './util';
 
 // import {
 // } from './types';
@@ -86,6 +87,8 @@ export default function CrosswordGrid({ theme }: CrosswordGridProps) {
     handleInputClick,
     handleCompositionEnd,
     registerFocusHandler,
+    keyIndexes,
+    selectKeywordMode,
     focused,
     selectedPosition: { row: focusedRow, col: focusedCol },
     selectedDirection: currentDirection,
@@ -177,6 +180,11 @@ export default function CrosswordGrid({ theme }: CrosswordGridProps) {
     [contextTheme, theme]
   );
 
+  const keyLabelMap: Record<number, string> = {};
+  keyIndexes.forEach((key, i) => {
+    keyLabelMap[key] = indexToAlphabet(i);
+  });
+
   return (
     <CrosswordSizeContext.Provider value={sizeContext}>
       <ThemeProvider theme={finalTheme}>
@@ -209,8 +217,14 @@ export default function CrosswordGrid({ theme }: CrosswordGridProps) {
                       }
                       highlight={
                         focused &&
+                        !selectKeywordMode &&
                         !!currentNumber &&
                         cellData[currentDirection] === currentNumber
+                      }
+                      keyLabel={
+                        typeof cellData.index === 'number'
+                          ? keyLabelMap[cellData.index]
+                          : ''
                       }
                       onClick={handleCellClick}
                     />

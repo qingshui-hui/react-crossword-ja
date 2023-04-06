@@ -1,11 +1,11 @@
 {
-  "name": "@naari3/react-crossword-ja",
-  "homepage": "https://naari3.github.io/react-crossword-ja",
+  "name": "@qingshui-hui/react-crossword-ja",
+  "homepage": "https://github.com/qingshui-hui/react-crossword-ja",
   "version": "4.5.0",
   "description": "A flexible, responsive, and easy-to-use crossword component for React apps",
   "author": {
-    "name": "naari3",
-    "email": "naari.named@hotmail.com"
+    "name": "qingshui-hui",
+    "email": "stakanari987@gmail.com"
   },
   "keywords": [
     "react",
@@ -17,7 +17,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/naari3/react-crossword-ja"
+    "url": "https://github.com/qingshui-hui/react-crossword-ja"
   },
   "license": "MIT",
   "engines": {
@@ -51,6 +51,7 @@
     "!**/*.test.js"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/qingshui-hui",
     "access": "public"
   },
   "config": {
